@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>正则表达式学习</title>
+	<link rel="stylesheet" href="css/main.css">
+	<style>
+		.title{
+			width:100%;
+			background-color: #007aff;
+			color:white;
+			font-size: 25px;
+			font-weight: bold;
+			padding:10px;
+		}
+		.content{
+			width:100%;
+			background-color: #eee;
+			padding:10px;
+		}
+	</style>
+</head>
+<body>
+<div class="main" id="main">
+	
+</div>
+<script src="js/common.js"></script>
+<script>
+	var main = dom.id('main');
+	var mail = /^[a-z0-9A-Z_]+@\S+\.([a-z0-9A-Z])+/i;
+	var e = 'asdd@126.com';
+	mail.test(e) ? alert('true') : alert('false')
+	var test = new View({
+		data:{
+			title:'leoxei',
+			content:'这是VIEW生成的'
+		},
+		ele:main,
+		tpl:'tpl/reg.tpl'
+	})
+	test.render()
+</script>
+</body>
+</html>

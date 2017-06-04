@@ -49,3 +49,46 @@ ClassList.prototype = {
 		}
 	}
 }
+
+function strToJson(str){
+	var res;
+	if(JSON.parse){
+		res = JSON.parse(str);
+	}else{
+		res = (new Function('return '+str)());
+	}
+	return res;
+}
+function ajax(url,callback,method){
+	var method = method || 'get';
+	var xml;
+	if(window.XMLHttpRequest){
+		xml = new XMLHttpRequest()
+	}else{
+		xml = new ActiveXObject("Microsoft.XMLHTTP")
+	}
+	xml.onreadystatechange = function(){
+		if(xml.readyState == 4 && xml.status == 200){
+			callback(xml.responseText)
+		}
+	}
+	xml.open(method,url,true)
+	xml.send(null)
+}
+var View = function(data){
+	this.data = data.data;
+	this.tpl = data.tpl;
+	this.ele = data.ele;
+}
+View.prototype = {
+	render:function(){
+		var ele = this.ele,
+			data = this.data;
+		ajax(this.tpl,function(ret){
+			for(var i in data){
+				ret = ret.replace("{{"+i+"}}",data[i]);			
+			}
+			ele.innerHTML = ret;
+		})
+	}
+}
