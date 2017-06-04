@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="view-port" content="width=device-width,initial-scale=1,user-scalable=0">
+	<title>git命令整理</title>
+	<link rel="stylesheet" href="css/main.css">
+	<style>
+		.list-box{
+			width:100%;
+		}
+		.list-box .title{
+			color:#007aff;
+			list-style:none;
+			font-weight: bold;
+			font-size: 20px;
+		}
+		.list-box .item{
+			margin:10px 20px;
+			padding-bottom:10px;
+			border:1px solid #007aff;
+			list-style-type: square;
+			list-style-image: url('img/star.jpg');
+		}
+		.list-box .item .item-title{
+			background-color: #007aff;
+			padding:10px;
+			color:white;
+		}
+		.list-box .item .command,
+		.list-box .item .return,
+		.list-box .item .example,
+		.list-box .item .notice,
+		.list-box .item .des{
+			padding:10px;
+		}
+		.list-box .item .command:before{
+			content:"命　令 : ";
+			display: inline-block;
+			color:#007aff;
+			font-weight: bold;
+			padding-right: 10px;
+		}
+		.list-box .item .return:before{
+			content:"返回值 : ";
+			display: inline-block;
+			color:#13E06B;
+			font-weight: bold;
+			padding-right: 10px;
+		}
+		.list-box .item .example:before{
+			content:"例　子 : ";
+			display: block;
+			color:#007aff;
+			font-weight: bold;
+		}
+		.list-box .item .notice:before{
+			content: '注　意 : ';
+			display: inline-block;
+			color:red;
+			font-weight: bold;
+			padding-right: 10px;
+		}
+		.list-box .item .des{
+			background-color: rgba(0,200,0,0.1);
+			border-left: 3px solid #13E06B;
+			margin:0 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="head">GIT命令整理</h1>
+	<div class="main">
+		<ul class="list-box">
+			<li class="title">命令</li>
+			<!-- <li class="item">
+				<div class="item-title">获取GIT版本</div>
+				<div class="command">git --version</div>
+				<div class="des">asdfsd</div>
+				<div class="example">
+<pre class="code">var leoxie</pre>
+				</div>
+				<div class="notice">notice</div>
+				<div class="return">
+					当前版本信息；git version 2.13.0.windows.1
+				</div>
+			</li> -->
+		</ul>
+	</div>
+
+<script src="js/common.js"></script>
+<script>
+	var listBox = dom._class('list-box'),
+		data = [
+			{
+				title:'获取当前的GIT版本',
+				command:'git --version',
+				ret:'得到当前版本；git version 2.13.0.windows.1'
+			},
+			{
+				title:'获取帮助信息',
+				command:'git --help',
+				example:'git --help<br>git remote --help(这个操作会弹出一个帮助网页)'
+			},
+			{
+				title:'克隆仓库',
+				command:'git clone <仓库地址>',
+				example:'git clone git@github.com/xiemenga11/demo.git',
+				notice:'仓库地址后面一定要加上.git'
+			},
+			{
+				title:'初始化仓库',
+				command:'git init',
+				des:'可以在当前文件夹下初始化一个本地仓库'
+			}
+		]
+	for(var i = 0; i < data.length; i++){
+		render(data[i],listBox[0])
+	}
+
+	function render(data,box){
+		if(!data) return;
+		var item = dom.create('li'),
+			itemTitle = dom.create('div'),
+			itemCommand = dom.create('div'),
+			itemReturn,
+			example,
+			notice,
+			des;
+
+		item.className = "item";
+		itemTitle.className = "item-title";
+		itemCommand.className = "command";
+
+		// item.innerHTML = 
+		itemTitle.innerHTML = data.title;
+		itemCommand.innerHTML = data.command;
+
+		item.appendChild(itemTitle);
+		item.appendChild(itemCommand);
+		if(data.des){
+			des = dom.create('div');
+			des.className = "des";
+			des.innerHTML = data.des;
+			item.appendChild(des)
+		}
+		if(data.example){
+			example = dom.create('div');
+			example.className = "example";
+			example.innerHTML = "<pre class='code'>"+data.example+"</pre>";
+			item.appendChild(example)
+		}
+		if(data.notice){
+			notice = dom.create('div');
+			notice.className = "notice";
+			notice.innerHTML = data.notice;
+			item.appendChild(notice);
+		}
+		if(data.ret){
+			itemReturn = dom.create('div');
+			itemReturn.className = "return";
+			itemReturn.innerHTML = data.ret;
+			item.appendChild(itemReturn);
+		}
+		box.appendChild(item);
+	}
+</script>
+</body>
+</html>

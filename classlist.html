@@ -31,8 +31,8 @@
 	</style>
 </head>
 <body>
+	<h1 id="head">classList测试例子</h1>
 	<div class="test">
-		<h1>classList测试例子</h1>
 		<div id="test" class="demotest center red txt-blue">classList</div>
 		<button id="removeRed">remove red</button>
 		<button id="addGreen">add green</button>
@@ -75,7 +75,7 @@ var demoCls = demo.list
 				<p>如果传了condition并且condition为就添加指定类名，如果为假就删除指定类名</p>
 			</li>
 		</ol>
-		<h1>3、示例</h1>
+		<h2>3、示例</h2>
 <pre class="code">
 // div是具有class =“foo bar”的<div>元素的对象引用
 div.classList.remove("foo");
@@ -132,8 +132,7 @@ ClassList.prototype = {
 }
 </pre>
 	</div>
-
-<div id="newTest" class="center demotest green blue">adfadsf</div>
+<a id="goHome" href="index.html">返回首页</a>
 <script>
 //vars
 var test      = document.getElementById('test')
@@ -220,19 +219,7 @@ ClassList.prototype = {
 		}
 	}
 }
-var dom = document.getElementById('newTest')
-var clsList = new ClassList(dom)
-if(clsList.contains("demotest")){
-	alert('yes')
-}else{
-	alert('no')
-}
-alert(clsList.item(0))
-clsList.remove("center","red")
-clsList.add('green',"red","center")
-setInterval(function(){
-	clsList.toggle('red')
-},1000)
+
 </script>
 </body>
 </html>

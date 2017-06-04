@@ -1,6 +1,41 @@
+*{
+	padding:0;
+	margin:0;
+	text-decoration: none;
+	font-family: sans-serif;
+	color:#777;
+}
 .code{
 	background-color: #ddd;
 	border:1px solid #ddd;
 	padding:10px;
 	font-family: sans-serif;
 }
+.green{
+	color:#13E06B;
+}
+#goHome{
+	padding:10px 20px;
+	background-color: rgba(0,0,0,0.3);
+	color:white;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+#head,
+.head{
+	width:100%;
+	text-align: center;
+	font-size: 25px;
+	color:white;
+	background-color: #007aff;
+	padding:10px;
+	margin-bottom: 10px;			
+}
+#main,
+.main{
+	width:1000px;
+	margin:0 auto;
+}
+
+
