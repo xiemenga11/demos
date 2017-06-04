@@ -1,0 +1,90 @@
+*{
+	padding:0;
+	margin:0;
+	
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	-o-box-sizing:border-box;
+}
+html,
+body{
+	width:100%;
+	height:100%;
+}
+.leo-diag{
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	width:20%;
+	height:25%;
+	min-height: 150px;
+	min-width: 250px;
+	margin:auto;
+	border-radius: 10px;
+	z-index: 999;
+	background-color: white;
+}
+.leo-diag .title{
+	padding:10px;
+	background-color: #007aff;
+	color:white;
+	text-align: center;
+	border-radius: 10px 10px 0 0;
+}
+.leo-diag .content{
+	padding:10px;
+}
+.leo-diag .btn-box{
+	text-align: center;
+	/*margin: 0 10px;*/
+	border-top: 1px solid #eee;
+	/*padding:10px;*/
+	position: absolute;
+	bottom: 0;
+	left:0;	
+	width:100%;
+	height: 40px;
+	line-height: 40px;
+}
+.leo-diag .btn-box button{
+	padding:5px 10px;
+	border-radius: 5px;
+	border: none;
+}
+.warning:hover{
+	background-color: #c84040;
+}
+.warning{
+	background-color: #d95151;
+}
+.confirm:hover{
+	background-color: #118bff;
+}
+.confirm{
+	background-color: #007aff;
+}
+.checked:hover{
+	background-color: #abd865;
+}
+.checked{
+	background-color: #9ac754;
+}
+.checked,
+.warning,
+.confirm{
+	color:white;
+}
+
+.leo-diag-mask{
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.3);
+	position: fixed;
+	left:0;
+	top:0;
+	z-index: 1;
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>querySelector</title>
+</head>
+<body>
+<div class="item">tag div 1</div>
+<div>tag div 2</div>
+<div>tag div 3</div>
+<div>tag div 4</div>
+<div>tag div 5</div>
+<div id="box">id div</div>
+<div class="leo">class div 1</div>
+<div class="leo">class div 2</div>
+<div class="leo">class div 3</div>
+<div class="box">
+	<p class="item">class item</p>
+</div>
+<script>
+(function(){
+	var _l = function(obj){
+		this.dom = document.querySelector(obj)
+		return this
+	}
+
+	_l.prototype = {
+		html:function(txt){
+			if(txt.length>0){
+				this.dom.innerHTML = txt
+			}else{
+				return this.dom.innerHTML
+			}
+			return this
+		}
+	}
+
+	window.l = function(obj){
+		return new _l(obj)
+	}
+}())
+
+var x = ['leo','xie','meng','leo']
+alert(x.lastIndexOf('leo'))
+</script>
+</body>
+</html>

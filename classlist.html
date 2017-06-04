@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>classList用法</title>
+	<link rel="stylesheet" href="css/main.css">
+	<style>
+		.test{
+			width:500px;
+			margin:0 auto;
+		}
+		.center{
+			text-align: center;
+		}
+		.demotest{
+			font-size: 50px;
+		}
+		.red{
+			background-color: red;
+		}
+		.txt-blue{
+			color:blue;
+		}
+		.green{
+			border:1px solid green;
+		}
+		.toggle{
+			font-size: 30px;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="test">
+		<h1>classList测试例子</h1>
+		<div id="test" class="demotest center red txt-blue">classList</div>
+		<button id="removeRed">remove red</button>
+		<button id="addGreen">add green</button>
+		<button id="toggle">toggle</button>
+		<button id="toggle2">toggle有条件的转换</button>
+		<button id="change">改变I的值</button>
+		<button id="contain">检查CLASS有无toggle属性</button>
+		<button id="item" title="这里默认获取第一个">根据索引获取CSS类名（获取第一个）</button>
+	</div>
+	<div class="test">
+		<h1>classList的介绍</h1>
+		<h3>classList是一个元素类名的集合的属性,它是及时的,而不是一个元素创建时生成的快照.所以它的改变会及时在这个元素上体现</h3>
+		<h2>1、语法</h2>
+<pre class="code">
+var demo = document.getElementById('demo')
+var demoCls = demo.list
+</pre>
+		<h2>2、方法</h2>
+		<ol>
+			<li>
+				<h3>classList.add(string,string,……)</h3>
+				<p>向一个元素添加一个类名</p>
+			</li>
+			<li>
+				<h3>classList.remove(string,string,……)</h3>
+				<p>删除一个元素的类名</p>
+			</li>
+			<li>
+				<h3>classList.item(int)</h3>
+				<p>根据int索引返回一个元素对应的类名</p>
+			</li>
+			<li>
+				<h3>classList.contains(string)</h3>
+				<p>检测一个元素是否存在指定的类名</p>
+			</li>
+			<li>
+				<h3>classList.toggle(string,condition)</h3>
+				<p>如果一个元素有指定的类名，就将这个类名删除，否则就添加这个类名（个人觉得这个很好用啊）</p>
+
+				<p>如果传了condition并且condition为就添加指定类名，如果为假就删除指定类名</p>
+			</li>
+		</ol>
+		<h1>3、示例</h1>
+<pre class="code">
+// div是具有class =“foo bar”的<div>元素的对象引用
+div.classList.remove("foo");
+div.classList.add("anotherclass");
+
+// 如果visible被设置则删除它，否则添加它
+div.classList.toggle("visible");
+
+// 添加/删除 visible，取决于测试条件，i小于10
+div.classList.toggle("visible", i < 10);
+
+alert(div.classList.contains("foo"));
+
+//添加或删除多个类
+div.classList.add("foo","bar");
+div.classList.remove("foo", "bar");
+
+
+/*--------------*/
+//如果不支持classList属性的代替方法
+var ClassList = function(obj){
+	this.obj = obj
+	this.cls = this.obj.className.split(" ")
+}
+ClassList.prototype = {
+	contains:function(cls){
+		return this.cls.indexOf(cls) == -1 ? false : true
+	},
+	item:function(index){
+		return this.cls[index]
+	},
+	remove:function(cls){
+		for(var i = 0; i < arguments.length; i++){
+			var _index = this.cls.indexOf(arguments[i])
+			if(_index === -1) continue;
+			else delete this.cls[_index];
+		}
+		this.obj.className = this.cls.join(" ")
+	},
+	add:function(cls){
+		for(var i = 0; i < arguments.length; i++){
+			if(this.contains(arguments[i])) continue;
+			else this.cls.push(arguments[i]);
+		}
+		this.obj.className = this.cls.join(" ")
+	},
+	toggle:function(cls,condition){
+		if(this.contains(cls)){
+			this.remove(cls)
+		}else{
+			this.add(cls)
+		}
+	}
+}
+</pre>
+	</div>
+
+<div id="newTest" class="center demotest green blue">adfadsf</div>
+<script>
+//vars
+var test      = document.getElementById('test')
+var testCls   = classList(test)
+var removeRed = document.getElementById('removeRed')
+var addGreen  = document.getElementById('addGreen')
+var toggle    = document.getElementById('toggle')
+var toggle2   = document.getElementById('toggle2')
+var contain   = document.getElementById('contain')
+var item      = document.getElementById('item')
+var changeI   = document.getElementById('change')
+var codes     = document.getElementsByClassName('code')
+//functions
+function classList(obj){
+	return obj.classList ? obj.classList : false
+}
+function htmlentites(dom){
+	var html = dom.innerHTML
+	html = html.replace(/</g,"&lt").replace(/>/,"&gt")
+	dom.innerHTML = html
+}
+
+for(var i = 0; i < codes.length; i++){
+	htmlentites(codes[i])
+}
+//events
+var i=false;//测试toggle2时用的变量
+changeI.onclick = function(){
+	i = !i
+}
+removeRed.onclick = function(){
+	testCls.remove('red')
+}
+addGreen.onclick = function(){
+	testCls.add('green')
+}
+toggle.onclick = function(){
+	testCls.toggle('toggle')
+}
+toggle2.onclick = function(){
+	if(!i){
+		alert('i的值不是true')
+	}
+	testCls.toggle('toggle', i == true)
+}
+contain.onclick = function(){
+	alert(testCls.contains('toggle') ? 'ClassName中有toggle' : 'ClassName中没有toggle')
+}
+item.onclick = function(){
+	alert(testCls.item(0))
+}
+
+var ClassList = function(obj){
+	this.obj = obj
+	this.cls = this.obj.className.split(" ")
+}
+ClassList.prototype = {
+	contains:function(cls){
+		return this.cls.indexOf(cls) == -1 ? false : true
+	},
+	item:function(index){
+		return this.cls[index]
+	},
+	remove:function(cls){
+		for(var i = 0; i < arguments.length; i++){
+			var _index = this.cls.indexOf(arguments[i])
+			if(_index === -1) continue;
+			else delete this.cls[_index];
+		}
+		this.obj.className = this.cls.join(" ")
+	},
+	add:function(cls){
+		for(var i = 0; i < arguments.length; i++){
+			if(this.contains(arguments[i])) continue;
+			else this.cls.push(arguments[i]);
+		}
+		this.obj.className = this.cls.join(" ")
+	},
+	toggle:function(cls,condition){
+		if(this.contains(cls)){
+			this.remove(cls)
+		}else{
+			this.add(cls)
+		}
+	}
+}
+var dom = document.getElementById('newTest')
+var clsList = new ClassList(dom)
+if(clsList.contains("demotest")){
+	alert('yes')
+}else{
+	alert('no')
+}
+alert(clsList.item(0))
+clsList.remove("center","red")
+clsList.add('green',"red","center")
+setInterval(function(){
+	clsList.toggle('red')
+},1000)
+</script>
+</body>
+</html>
