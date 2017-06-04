@@ -3,7 +3,12 @@
 	margin:0;
 	text-decoration: none;
 	font-family: sans-serif;
-	color:#777;
+	color:#353535;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	-o-box-sizing:border-box;
 }
 .code{
 	background-color: #ddd;
@@ -34,7 +39,8 @@
 }
 #main,
 .main{
-	width:1000px;
+	width:98%;
+	max-width:1000px;
 	margin:0 auto;
 }
 
